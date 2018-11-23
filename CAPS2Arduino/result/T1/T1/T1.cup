@@ -1,0 +1,17 @@
+CupCarbon v. 3.0.0 (U-One)
+----------------
+name:T1
+zoom:1
+centerposition_la:48.390329839365656
+centerposition_lo:-4.477577805519104
+map:6
+display_details:true
+draw_radio_links:true
+draw_sensor_arrows:true
+radio_links_color:2
+draw_marker_arrows:false
+display_rl_distance:false
+propagation:false
+display_marker_distance:false
+display_radio_messages:true
+draw_script_file_name:true

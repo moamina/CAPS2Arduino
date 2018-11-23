@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<components:SoftwareArchitecture xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:components="components">
+  <SAElements xsi:type="components:Component">
+    <ports xsi:type="components:OutMessagePort"/>
+    <modes xsi:type="components:InitialMode">
+      <behaviouralElements xsi:type="components:Actuate" outgoing="//@SAElements.0/@modes.0/@behaviouralElements.3"/>
+      <behaviouralElements xsi:type="components:StartTimer" name="readingTimer" incoming="//@SAElements.0/@modes.0/@behaviouralElements.3" period="200"/>
+      <behaviouralElements xsi:type="components:TimerFired" name="readingTimer" outgoing="//@SAElements.0/@modes.0/@behaviouralElements.5"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.0/@modes.0/@behaviouralElements.0" target="//@SAElements.0/@modes.0/@behaviouralElements.1"/>
+      <behaviouralElements xsi:type="components:PeopleCounter" name="get(count)" outgoing="//@SAElements.0/@modes.0/@behaviouralElements.6" incoming="//@SAElements.0/@modes.0/@behaviouralElements.5"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.0/@modes.0/@behaviouralElements.2" target="//@SAElements.0/@modes.0/@behaviouralElements.4"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.0/@modes.0/@behaviouralElements.4" target="//@SAElements.0/@modes.0/@exits.0" condition="count>threshold"/>
+      <exits incoming="//@SAElements.0/@modes.0/@behaviouralElements.6" targetMode="//@SAElements.0/@modes.1/@entries.0"/>
+    </modes>
+    <modes>
+      <behaviouralElements xsi:type="components:UnicastSendMessage" name="" incoming="//@SAElements.0/@modes.1/@behaviouralElements.1" data="count" toMessagePorts="//@SAElements.0/@ports.0" dataRecipient="//@SAElements.0/@applicationData.0" receiverName=""/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.0/@modes.1/@entries.0" target="//@SAElements.0/@modes.1/@behaviouralElements.0"/>
+      <entries outgoing="//@SAElements.0/@modes.1/@behaviouralElements.1"/>
+    </modes>
+    <applicationData xsi:type="components:PrimitiveDataDeclaration" dataName="Temp" value="0" type="real"/>
+    <applicationData xsi:type="components:PrimitiveDataDeclaration" dataName="threshold" value="35"/>
+    <applicationData xsi:type="components:PrimitiveDataDeclaration" dataName="count"/>
+  </SAElements>
+  <SAElements xsi:type="components:Component">
+    <ports xsi:type="components:InMessagePort"/>
+    <modes xsi:type="components:InitialMode" name="receive(msg)">
+      <behaviouralElements xsi:type="components:ReceiveMessage" name="receive" dataRecipientName="msg" fromMessagePorts="//@SAElements.1/@ports.0" dataRecipient="//@SAElements.1/@applicationData.0"/>
+    </modes>
+    <applicationData xsi:type="components:PrimitiveDataDeclaration" dataName="val" value="" type="real"/>
+  </SAElements>
+  <SAElements xsi:type="components:Connection" source="//@SAElements.0/@ports.0" target="//@SAElements.1/@ports.0"/>
+</components:SoftwareArchitecture>

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<components:SoftwareArchitecture xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:components="components">
+  <SAElements xsi:type="components:Component" name="Car1">
+    <ports xsi:type="components:OutMessagePort"/>
+    <ports xsi:type="components:OutMessagePort"/>
+    <ports xsi:type="components:InMessagePort"/>
+    <ports xsi:type="components:InMessagePort"/>
+    <modes xsi:type="components:InitialMode">
+      <behaviouralElements xsi:type="components:SenseAccelerometer" outgoing="//@SAElements.0/@modes.0/@behaviouralElements.3" incoming="//@SAElements.0/@modes.0/@behaviouralElements.9" dataDeclarationName="speed1" data="speed1" dataRecipient="//@SAElements.0/@applicationData.0"/>
+      <behaviouralElements xsi:type="components:SensePosition" outgoing="//@SAElements.0/@modes.0/@behaviouralElements.5" incoming="//@SAElements.0/@modes.0/@behaviouralElements.10" dataDeclarationName="loc1" data="loc1" dataRecipient="//@SAElements.0/@applicationData.1"/>
+      <behaviouralElements xsi:type="components:UnicastSendMessage" incoming="//@SAElements.0/@modes.0/@behaviouralElements.3" data="speed1" toMessagePorts="//@SAElements.0/@ports.0" dataRecipient="//@SAElements.3/@applicationData.1"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.0/@modes.0/@behaviouralElements.0" target="//@SAElements.0/@modes.0/@behaviouralElements.2"/>
+      <behaviouralElements xsi:type="components:UnicastSendMessage" incoming="//@SAElements.0/@modes.0/@behaviouralElements.5" data="loc1" toMessagePorts="//@SAElements.0/@ports.1" dataRecipient="//@SAElements.0/@applicationData.1"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.0/@modes.0/@behaviouralElements.1" target="//@SAElements.0/@modes.0/@behaviouralElements.4"/>
+      <behaviouralElements xsi:type="components:ReceiveMessage" outgoing="//@SAElements.0/@modes.0/@behaviouralElements.16" dataRecipientName="car1park2" fromMessagePorts="//@SAElements.0/@ports.2" dataRecipient="//@SAElements.2/@applicationData.3"/>
+      <behaviouralElements xsi:type="components:TimerFired" outgoing="//@SAElements.0/@modes.0/@behaviouralElements.9" timer="//@SAElements.0/@modes.0/@behaviouralElements.11"/>
+      <behaviouralElements xsi:type="components:TimerFired" outgoing="//@SAElements.0/@modes.0/@behaviouralElements.10" timer="//@SAElements.0/@modes.0/@behaviouralElements.12"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.0/@modes.0/@behaviouralElements.7" target="//@SAElements.0/@modes.0/@behaviouralElements.0" condition="t=200"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.0/@modes.0/@behaviouralElements.8" target="//@SAElements.0/@modes.0/@behaviouralElements.1" condition="t=200"/>
+      <behaviouralElements xsi:type="components:StartTimer" name="ST1" cyclic="true" period="200"/>
+      <behaviouralElements xsi:type="components:StartTimer" name="ST2" cyclic="true" period="200"/>
+      <behaviouralElements xsi:type="components:ReceiveMessage" name="" outgoing="//@SAElements.0/@modes.0/@behaviouralElements.15" dataRecipientName="car1par1" fromMessagePorts="//@SAElements.0/@ports.3" dataRecipient="//@SAElements.2/@applicationData.2"/>
+      <behaviouralElements xsi:type="components:StoreData" incoming="//@SAElements.0/@modes.0/@behaviouralElements.15" dataRecipient="//@SAElements.2/@applicationData.2"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.0/@modes.0/@behaviouralElements.13" target="//@SAElements.0/@modes.0/@behaviouralElements.14"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.0/@modes.0/@behaviouralElements.6" target="//@SAElements.0/@modes.0/@behaviouralElements.17"/>
+      <behaviouralElements xsi:type="components:StoreData" incoming="//@SAElements.0/@modes.0/@behaviouralElements.16" dataRecipient="//@SAElements.2/@applicationData.3"/>
+    </modes>
+    <applicationData xsi:type="components:PrimitiveDataDeclaration" dataName="speed1" value="" type="real"/>
+    <applicationData xsi:type="components:PrimitiveDataDeclaration" dataName="loc1" value="" type="real"/>
+  </SAElements>
+  <SAElements xsi:type="components:Component" name="Car2">
+    <ports xsi:type="components:OutMessagePort"/>
+    <ports xsi:type="components:InMessagePort"/>
+    <ports xsi:type="components:OutMessagePort"/>
+    <ports xsi:type="components:InMessagePort"/>
+    <modes xsi:type="components:InitialMode">
+      <behaviouralElements xsi:type="components:SensePosition" outgoing="//@SAElements.1/@modes.0/@behaviouralElements.4" incoming="//@SAElements.1/@modes.0/@behaviouralElements.10" dataDeclarationName="loc2" data="loc2" dataRecipient="//@SAElements.1/@applicationData.0"/>
+      <behaviouralElements xsi:type="components:SenseAccelerometer" outgoing="//@SAElements.1/@modes.0/@behaviouralElements.8" incoming="//@SAElements.1/@modes.0/@behaviouralElements.7" dataDeclarationName="speed2" data="speed2" dataRecipient="//@SAElements.1/@applicationData.1"/>
+      <behaviouralElements xsi:type="components:UnicastSendMessage" incoming="//@SAElements.1/@modes.0/@behaviouralElements.8" data="speed2" toMessagePorts="//@SAElements.1/@ports.2" dataRecipient="//@SAElements.1/@applicationData.1"/>
+      <behaviouralElements xsi:type="components:UnicastSendMessage" incoming="//@SAElements.1/@modes.0/@behaviouralElements.4" data="loc2" toMessagePorts="//@SAElements.1/@ports.0" dataRecipient="//@SAElements.1/@applicationData.0"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.1/@modes.0/@behaviouralElements.0" target="//@SAElements.1/@modes.0/@behaviouralElements.3"/>
+      <behaviouralElements xsi:type="components:ReceiveMessage" outgoing="//@SAElements.1/@modes.0/@behaviouralElements.16" dataRecipientName="car2park2" fromMessagePorts="//@SAElements.1/@ports.1" dataRecipient="//@SAElements.2/@applicationData.5"/>
+      <behaviouralElements xsi:type="components:TimerFired" name="" outgoing="//@SAElements.1/@modes.0/@behaviouralElements.7" timer="//@SAElements.1/@modes.0/@behaviouralElements.11"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.1/@modes.0/@behaviouralElements.6" target="//@SAElements.1/@modes.0/@behaviouralElements.1" condition="t=200"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.1/@modes.0/@behaviouralElements.1" target="//@SAElements.1/@modes.0/@behaviouralElements.2"/>
+      <behaviouralElements xsi:type="components:TimerFired" outgoing="//@SAElements.1/@modes.0/@behaviouralElements.10" timer="//@SAElements.1/@modes.0/@behaviouralElements.12"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.1/@modes.0/@behaviouralElements.9" target="//@SAElements.1/@modes.0/@behaviouralElements.0" condition="t=200"/>
+      <behaviouralElements xsi:type="components:StartTimer" name="ST3" cyclic="true" period="200"/>
+      <behaviouralElements xsi:type="components:StartTimer" name="ST4" cyclic="true" period="200"/>
+      <behaviouralElements xsi:type="components:ReceiveMessage" outgoing="//@SAElements.1/@modes.0/@behaviouralElements.15" dataRecipientName="car2park1" fromMessagePorts="//@SAElements.1/@ports.3" dataRecipient="//@SAElements.2/@applicationData.4"/>
+      <behaviouralElements xsi:type="components:StoreData" incoming="//@SAElements.1/@modes.0/@behaviouralElements.16" dataRecipient="//@SAElements.2/@applicationData.5"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.1/@modes.0/@behaviouralElements.13" target="//@SAElements.1/@modes.0/@behaviouralElements.17"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.1/@modes.0/@behaviouralElements.5" target="//@SAElements.1/@modes.0/@behaviouralElements.14"/>
+      <behaviouralElements xsi:type="components:StoreData" incoming="//@SAElements.1/@modes.0/@behaviouralElements.15" dataRecipient="//@SAElements.2/@applicationData.4"/>
+    </modes>
+    <applicationData xsi:type="components:PrimitiveDataDeclaration" dataName="loc2" value="" type="real"/>
+    <applicationData xsi:type="components:PrimitiveDataDeclaration" dataName="speed2" value="" type="real"/>
+  </SAElements>
+  <SAElements xsi:type="components:Component" name="Database Server">
+    <ports xsi:type="components:InMessagePort"/>
+    <ports xsi:type="components:OutMessagePort"/>
+    <ports xsi:type="components:OutMessagePort"/>
+    <ports xsi:type="components:InMessagePort"/>
+    <ports xsi:type="components:InMessagePort"/>
+    <ports xsi:type="components:InMessagePort"/>
+    <ports xsi:type="components:InMessagePort"/>
+    <ports xsi:type="components:InMessagePort"/>
+    <ports xsi:type="components:OutMessagePort"/>
+    <ports xsi:type="components:OutMessagePort"/>
+    <ports xsi:type="components:OutMessagePort"/>
+    <ports xsi:type="components:OutMessagePort"/>
+    <modes xsi:type="components:InitialMode" name="speed">
+      <behaviouralElements xsi:type="components:ReceiveMessage" outgoing="//@SAElements.2/@modes.0/@behaviouralElements.4" dataRecipientName="speed1" fromMessagePorts="//@SAElements.2/@ports.3" dataRecipient="//@SAElements.0/@applicationData.0"/>
+      <behaviouralElements xsi:type="components:ReceiveMessage" outgoing="//@SAElements.2/@modes.0/@behaviouralElements.42" dataRecipientName="loc2" fromMessagePorts="//@SAElements.2/@ports.0" dataRecipient="//@SAElements.1/@applicationData.0"/>
+      <behaviouralElements xsi:type="components:ReceiveMessage" outgoing="//@SAElements.2/@modes.0/@behaviouralElements.48" dataRecipientName="speed3" fromMessagePorts="//@SAElements.2/@ports.4" dataRecipient="//@SAElements.3/@applicationData.1"/>
+      <behaviouralElements xsi:type="components:Join" outgoing="//@SAElements.2/@modes.0/@behaviouralElements.6 //@SAElements.2/@modes.0/@behaviouralElements.28 //@SAElements.2/@modes.0/@behaviouralElements.32 //@SAElements.2/@modes.0/@behaviouralElements.35" incoming="//@SAElements.2/@modes.0/@behaviouralElements.39 //@SAElements.2/@modes.0/@behaviouralElements.44 //@SAElements.2/@modes.0/@behaviouralElements.47"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.2/@modes.0/@behaviouralElements.0" target="//@SAElements.2/@modes.0/@behaviouralElements.36"/>
+      <behaviouralElements xsi:type="components:Choice" outgoing="//@SAElements.2/@modes.0/@behaviouralElements.8 //@SAElements.2/@modes.0/@behaviouralElements.10" incoming="//@SAElements.2/@modes.0/@behaviouralElements.6"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.2/@modes.0/@behaviouralElements.3" target="//@SAElements.2/@modes.0/@behaviouralElements.5" condition="loc1-loc2&lt;rad &amp; loc1-loc3&lt;rad"/>
+      <behaviouralElements xsi:type="components:Choice" outgoing="//@SAElements.2/@modes.0/@behaviouralElements.16 //@SAElements.2/@modes.0/@behaviouralElements.18" incoming="//@SAElements.2/@modes.0/@behaviouralElements.8 //@SAElements.2/@modes.0/@behaviouralElements.29 //@SAElements.2/@modes.0/@behaviouralElements.33 //@SAElements.2/@modes.0/@behaviouralElements.35"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.2/@modes.0/@behaviouralElements.5" target="//@SAElements.2/@modes.0/@behaviouralElements.7" condition="speed1>speed2 &amp; speed1>speed3"/>
+      <behaviouralElements xsi:type="components:Fork" outgoing="//@SAElements.2/@modes.0/@behaviouralElements.12 //@SAElements.2/@modes.0/@behaviouralElements.14" incoming="//@SAElements.2/@modes.0/@behaviouralElements.10"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.2/@modes.0/@behaviouralElements.5" target="//@SAElements.2/@modes.0/@behaviouralElements.9"/>
+      <behaviouralElements xsi:type="components:Choice" outgoing="//@SAElements.2/@modes.0/@behaviouralElements.24 //@SAElements.2/@modes.0/@behaviouralElements.26" incoming="//@SAElements.2/@modes.0/@behaviouralElements.12 //@SAElements.2/@modes.0/@behaviouralElements.30"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.2/@modes.0/@behaviouralElements.9" target="//@SAElements.2/@modes.0/@behaviouralElements.11" condition="speed2>speed1 &amp; speed2>speed3"/>
+      <behaviouralElements xsi:type="components:Choice" outgoing="//@SAElements.2/@modes.0/@behaviouralElements.20 //@SAElements.2/@modes.0/@behaviouralElements.22" incoming="//@SAElements.2/@modes.0/@behaviouralElements.14 //@SAElements.2/@modes.0/@behaviouralElements.34"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.2/@modes.0/@behaviouralElements.9" target="//@SAElements.2/@modes.0/@behaviouralElements.13" condition="speed3>speed1 &amp; speed3>speed2"/>
+      <behaviouralElements xsi:type="components:UnicastSendMessage" incoming="//@SAElements.2/@modes.0/@behaviouralElements.16" data="car1park1" toMessagePorts="//@SAElements.2/@ports.8" dataRecipient="//@SAElements.2/@applicationData.2"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.2/@modes.0/@behaviouralElements.7" target="//@SAElements.2/@modes.0/@behaviouralElements.15" condition="loc1-parkloc1&lt;loc1-parkloc2"/>
+      <behaviouralElements xsi:type="components:UnicastSendMessage" incoming="//@SAElements.2/@modes.0/@behaviouralElements.18" data="car1park2" toMessagePorts="//@SAElements.2/@ports.9" dataRecipient="//@SAElements.2/@applicationData.3"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.2/@modes.0/@behaviouralElements.7" target="//@SAElements.2/@modes.0/@behaviouralElements.17" condition="loc1-parkloc1>loc1-parkloc2"/>
+      <behaviouralElements xsi:type="components:UnicastSendMessage" incoming="//@SAElements.2/@modes.0/@behaviouralElements.20" data="car3park1" toMessagePorts="//@SAElements.2/@ports.10" dataRecipient="//@SAElements.2/@applicationData.6"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.2/@modes.0/@behaviouralElements.13" target="//@SAElements.2/@modes.0/@behaviouralElements.19" condition="loc3-parkloc1&lt;loc3-parkloc2"/>
+      <behaviouralElements xsi:type="components:UnicastSendMessage" incoming="//@SAElements.2/@modes.0/@behaviouralElements.22" data="car3park2" toMessagePorts="//@SAElements.2/@ports.2" dataRecipient="//@SAElements.2/@applicationData.7"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.2/@modes.0/@behaviouralElements.13" target="//@SAElements.2/@modes.0/@behaviouralElements.21" condition="loc3-parkloc1>loc3-parkloc2"/>
+      <behaviouralElements xsi:type="components:UnicastSendMessage" incoming="//@SAElements.2/@modes.0/@behaviouralElements.24" data="car2park1" toMessagePorts="//@SAElements.2/@ports.11" dataRecipient="//@SAElements.2/@applicationData.4"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.2/@modes.0/@behaviouralElements.11" target="//@SAElements.2/@modes.0/@behaviouralElements.23" condition="loc2-parkloc1&lt;loc2-parkloc2"/>
+      <behaviouralElements xsi:type="components:UnicastSendMessage" incoming="//@SAElements.2/@modes.0/@behaviouralElements.26" data="car2park2" toMessagePorts="//@SAElements.2/@ports.1" dataRecipient="//@SAElements.2/@applicationData.5"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.2/@modes.0/@behaviouralElements.11" target="//@SAElements.2/@modes.0/@behaviouralElements.25" condition="loc2-parkloc1>loc2-parkloc2"/>
+      <behaviouralElements xsi:type="components:Choice" outgoing="//@SAElements.2/@modes.0/@behaviouralElements.29 //@SAElements.2/@modes.0/@behaviouralElements.30" incoming="//@SAElements.2/@modes.0/@behaviouralElements.28"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.2/@modes.0/@behaviouralElements.3" target="//@SAElements.2/@modes.0/@behaviouralElements.27" condition="loc1-loc2&lt;rad &amp; loc1-loc3>rad"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.2/@modes.0/@behaviouralElements.27" target="//@SAElements.2/@modes.0/@behaviouralElements.7" condition="speed1>speed2"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.2/@modes.0/@behaviouralElements.27" target="//@SAElements.2/@modes.0/@behaviouralElements.11" condition="speed2>speed1"/>
+      <behaviouralElements xsi:type="components:Choice" outgoing="//@SAElements.2/@modes.0/@behaviouralElements.33 //@SAElements.2/@modes.0/@behaviouralElements.34" incoming="//@SAElements.2/@modes.0/@behaviouralElements.32"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.2/@modes.0/@behaviouralElements.3" target="//@SAElements.2/@modes.0/@behaviouralElements.31" condition="loc1-loc3&lt;rad &amp; loc1-loc2>rad"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.2/@modes.0/@behaviouralElements.31" target="//@SAElements.2/@modes.0/@behaviouralElements.7" condition="speed1>speed3"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.2/@modes.0/@behaviouralElements.31" target="//@SAElements.2/@modes.0/@behaviouralElements.13" condition="speed3>speed1"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.2/@modes.0/@behaviouralElements.3" target="//@SAElements.2/@modes.0/@behaviouralElements.7" condition="loc1-loc2>rad &amp; loc1-loc3>rad"/>
+      <behaviouralElements xsi:type="components:Join" outgoing="//@SAElements.2/@modes.0/@behaviouralElements.39" incoming="//@SAElements.2/@modes.0/@behaviouralElements.38 //@SAElements.2/@modes.0/@behaviouralElements.4"/>
+      <behaviouralElements xsi:type="components:ReceiveMessage" outgoing="//@SAElements.2/@modes.0/@behaviouralElements.38" dataRecipientName="loc1" fromMessagePorts="//@SAElements.2/@ports.5" dataRecipient="//@SAElements.0/@applicationData.1"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.2/@modes.0/@behaviouralElements.37" target="//@SAElements.2/@modes.0/@behaviouralElements.36"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.2/@modes.0/@behaviouralElements.36" target="//@SAElements.2/@modes.0/@behaviouralElements.3"/>
+      <behaviouralElements xsi:type="components:ReceiveMessage" outgoing="//@SAElements.2/@modes.0/@behaviouralElements.43" dataRecipientName="speed2" fromMessagePorts="//@SAElements.2/@ports.6" dataRecipient="//@SAElements.1/@applicationData.1"/>
+      <behaviouralElements xsi:type="components:Join" outgoing="//@SAElements.2/@modes.0/@behaviouralElements.44" incoming="//@SAElements.2/@modes.0/@behaviouralElements.42 //@SAElements.2/@modes.0/@behaviouralElements.43"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.2/@modes.0/@behaviouralElements.1" target="//@SAElements.2/@modes.0/@behaviouralElements.41"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.2/@modes.0/@behaviouralElements.40" target="//@SAElements.2/@modes.0/@behaviouralElements.41"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.2/@modes.0/@behaviouralElements.41" target="//@SAElements.2/@modes.0/@behaviouralElements.3"/>
+      <behaviouralElements xsi:type="components:ReceiveMessage" outgoing="//@SAElements.2/@modes.0/@behaviouralElements.49" dataRecipientName="loc3" fromMessagePorts="//@SAElements.2/@ports.7" dataRecipient="//@SAElements.3/@applicationData.0"/>
+      <behaviouralElements xsi:type="components:Join" outgoing="//@SAElements.2/@modes.0/@behaviouralElements.47" incoming="//@SAElements.2/@modes.0/@behaviouralElements.48 //@SAElements.2/@modes.0/@behaviouralElements.49"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.2/@modes.0/@behaviouralElements.46" target="//@SAElements.2/@modes.0/@behaviouralElements.3"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.2/@modes.0/@behaviouralElements.2" target="//@SAElements.2/@modes.0/@behaviouralElements.46"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.2/@modes.0/@behaviouralElements.45" target="//@SAElements.2/@modes.0/@behaviouralElements.46"/>
+    </modes>
+    <applicationData xsi:type="components:PrimitiveDataDeclaration" dataName="parkloc1" value="" type="real"/>
+    <applicationData xsi:type="components:PrimitiveDataDeclaration" dataName="parkloc2" value="" type="real"/>
+    <applicationData xsi:type="components:PrimitiveDataDeclaration" dataName="car1park1" value=""/>
+    <applicationData xsi:type="components:PrimitiveDataDeclaration" dataName="car1park2" value=""/>
+    <applicationData xsi:type="components:PrimitiveDataDeclaration" dataName="car2park1" value=""/>
+    <applicationData xsi:type="components:PrimitiveDataDeclaration" dataName="car2park2" value=""/>
+    <applicationData xsi:type="components:PrimitiveDataDeclaration" dataName="car3park1" value=""/>
+    <applicationData xsi:type="components:PrimitiveDataDeclaration" dataName="car3park2" value=""/>
+  </SAElements>
+  <SAElements xsi:type="components:Component" name="Car3">
+    <ports xsi:type="components:OutMessagePort"/>
+    <ports xsi:type="components:InMessagePort"/>
+    <ports xsi:type="components:OutMessagePort"/>
+    <ports xsi:type="components:InMessagePort"/>
+    <modes xsi:type="components:InitialMode">
+      <behaviouralElements xsi:type="components:SensePosition" outgoing="//@SAElements.3/@modes.0/@behaviouralElements.5" incoming="//@SAElements.3/@modes.0/@behaviouralElements.9" dataDeclarationName="loc3" data="loc3" dataRecipient="//@SAElements.3/@applicationData.0"/>
+      <behaviouralElements xsi:type="components:SenseAccelerometer" outgoing="//@SAElements.3/@modes.0/@behaviouralElements.3" incoming="//@SAElements.3/@modes.0/@behaviouralElements.10" dataDeclarationName="speed3" data="speed3" dataRecipient="//@SAElements.3/@applicationData.1"/>
+      <behaviouralElements xsi:type="components:UnicastSendMessage" incoming="//@SAElements.3/@modes.0/@behaviouralElements.3" data="speed3" toMessagePorts="//@SAElements.3/@ports.0" dataRecipient="//@SAElements.3/@applicationData.1"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.3/@modes.0/@behaviouralElements.1" target="//@SAElements.3/@modes.0/@behaviouralElements.2"/>
+      <behaviouralElements xsi:type="components:UnicastSendMessage" incoming="//@SAElements.3/@modes.0/@behaviouralElements.5" data="loc3" toMessagePorts="//@SAElements.3/@ports.2" dataRecipient="//@SAElements.3/@applicationData.0"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.3/@modes.0/@behaviouralElements.0" target="//@SAElements.3/@modes.0/@behaviouralElements.4"/>
+      <behaviouralElements xsi:type="components:ReceiveMessage" outgoing="//@SAElements.3/@modes.0/@behaviouralElements.15" dataRecipientName="car3park1" fromMessagePorts="//@SAElements.3/@ports.1" dataRecipient="//@SAElements.2/@applicationData.6"/>
+      <behaviouralElements xsi:type="components:TimerFired" outgoing="//@SAElements.3/@modes.0/@behaviouralElements.10" timer="//@SAElements.3/@modes.0/@behaviouralElements.11"/>
+      <behaviouralElements xsi:type="components:TimerFired" outgoing="//@SAElements.3/@modes.0/@behaviouralElements.9" timer="//@SAElements.3/@modes.0/@behaviouralElements.12"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.3/@modes.0/@behaviouralElements.8" target="//@SAElements.3/@modes.0/@behaviouralElements.0" condition="t=200"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.3/@modes.0/@behaviouralElements.7" target="//@SAElements.3/@modes.0/@behaviouralElements.1" condition="t=200"/>
+      <behaviouralElements xsi:type="components:StartTimer" name="ST5" cyclic="true" period="200"/>
+      <behaviouralElements xsi:type="components:StartTimer" name="ST6" cyclic="true" period="200"/>
+      <behaviouralElements xsi:type="components:ReceiveMessage" outgoing="//@SAElements.3/@modes.0/@behaviouralElements.16" dataRecipientName="car3park2" fromMessagePorts="//@SAElements.3/@ports.3" dataRecipient="//@SAElements.2/@applicationData.7"/>
+      <behaviouralElements xsi:type="components:StoreData" incoming="//@SAElements.3/@modes.0/@behaviouralElements.15" dataRecipient="//@SAElements.2/@applicationData.6" data=""/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.3/@modes.0/@behaviouralElements.6" target="//@SAElements.3/@modes.0/@behaviouralElements.14"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.3/@modes.0/@behaviouralElements.13" target="//@SAElements.3/@modes.0/@behaviouralElements.17"/>
+      <behaviouralElements xsi:type="components:StoreData" incoming="//@SAElements.3/@modes.0/@behaviouralElements.16" dataRecipient="//@SAElements.2/@applicationData.7"/>
+    </modes>
+    <applicationData xsi:type="components:PrimitiveDataDeclaration" dataName="loc3" value="" type="real"/>
+    <applicationData xsi:type="components:PrimitiveDataDeclaration" dataName="speed3"/>
+  </SAElements>
+  <SAElements xsi:type="components:Connection" source="//@SAElements.0/@ports.0" target="//@SAElements.2/@ports.3"/>
+  <SAElements xsi:type="components:Connection" source="//@SAElements.1/@ports.0" target="//@SAElements.2/@ports.0"/>
+  <SAElements xsi:type="components:Connection" source="//@SAElements.3/@ports.0" target="//@SAElements.2/@ports.4"/>
+  <SAElements xsi:type="components:Connection" source="//@SAElements.2/@ports.1" target="//@SAElements.1/@ports.1"/>
+  <SAElements xsi:type="components:Connection" source="//@SAElements.2/@ports.2" target="//@SAElements.3/@ports.1"/>
+  <SAElements xsi:type="components:Connection" source="//@SAElements.0/@ports.1" target="//@SAElements.2/@ports.5"/>
+  <SAElements xsi:type="components:Connection" source="//@SAElements.1/@ports.2" target="//@SAElements.2/@ports.6"/>
+  <SAElements xsi:type="components:Connection" source="//@SAElements.3/@ports.2" target="//@SAElements.2/@ports.7"/>
+  <SAElements xsi:type="components:Connection" source="//@SAElements.2/@ports.9" target="//@SAElements.0/@ports.2"/>
+  <SAElements xsi:type="components:Connection" source="//@SAElements.2/@ports.8" target="//@SAElements.0/@ports.3"/>
+  <SAElements xsi:type="components:Connection" source="//@SAElements.2/@ports.10" target="//@SAElements.3/@ports.3"/>
+  <SAElements xsi:type="components:Connection" source="//@SAElements.2/@ports.11" target="//@SAElements.1/@ports.3"/>
+</components:SoftwareArchitecture>

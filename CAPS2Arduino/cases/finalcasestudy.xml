@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<components:SoftwareArchitecture xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:components="components">
+  <SAElements xsi:type="components:Component" name="OxygenSensor">
+    <ports xsi:type="components:OutMessagePort" name="normal"/>
+    <ports xsi:type="components:OutMessagePort" name="critical"/>
+    <modes xsi:type="components:InitialMode" name="Normal">
+      <behaviouralElements xsi:type="components:StartTimer" name="readingTimer" incoming="//@SAElements.0/@modes.0/@behaviouralElements.3" cyclic="true" period="100000"/>
+      <behaviouralElements xsi:type="components:SenseOxygen" name="senseOxyg1" outgoing="//@SAElements.0/@modes.0/@behaviouralElements.7" incoming="//@SAElements.0/@modes.0/@behaviouralElements.5" dataDeclarationName="O2" data="O2" dataRecipient="//@SAElements.0/@applicationData.0"/>
+      <behaviouralElements xsi:type="components:UnicastSendMessage" name="1" outgoing="//@SAElements.0/@modes.0/@behaviouralElements.6" incoming="//@SAElements.0/@modes.0/@behaviouralElements.7" data="O2" toMessagePorts="//@SAElements.0/@ports.0" dataRecipient="//@SAElements.0/@applicationData.0" receiverName="RoomController"/>
+      <behaviouralElements xsi:type="components:Link" target="//@SAElements.0/@modes.0/@behaviouralElements.0"/>
+      <behaviouralElements xsi:type="components:TimerFired" name="" outgoing="//@SAElements.0/@modes.0/@behaviouralElements.5" timerName="readingTimer" timer="//@SAElements.0/@modes.0/@behaviouralElements.0"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.0/@modes.0/@behaviouralElements.4" target="//@SAElements.0/@modes.0/@behaviouralElements.1"/>
+      <behaviouralElements xsi:type="components:Link" name="fork1" source="//@SAElements.0/@modes.0/@behaviouralElements.2" target="//@SAElements.0/@modes.0/@exits.0" condition="O2&lt;0.19"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.0/@modes.0/@behaviouralElements.1" target="//@SAElements.0/@modes.0/@behaviouralElements.2"/>
+      <entries/>
+      <exits incoming="//@SAElements.0/@modes.0/@behaviouralElements.6" targetMode="//@SAElements.0/@modes.1/@entries.0"/>
+    </modes>
+    <modes name="Critical">
+      <behaviouralElements xsi:type="components:StartTimer" name="criticalTimer" cyclic="true" period="1000"/>
+      <behaviouralElements xsi:type="components:TimerFired" outgoing="//@SAElements.0/@modes.1/@behaviouralElements.3"/>
+      <behaviouralElements xsi:type="components:SenseOxygen" name="senseOxyg2" outgoing="//@SAElements.0/@modes.1/@behaviouralElements.5" incoming="//@SAElements.0/@modes.1/@behaviouralElements.3" dataDeclarationName="O2" data="O2" dataRecipient="//@SAElements.0/@applicationData.0"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.0/@modes.1/@behaviouralElements.1" target="//@SAElements.0/@modes.1/@behaviouralElements.2"/>
+      <behaviouralElements xsi:type="components:UnicastSendMessage" name="2" outgoing="//@SAElements.0/@modes.1/@behaviouralElements.6" incoming="//@SAElements.0/@modes.1/@behaviouralElements.5" data="O2" toMessagePorts="//@SAElements.0/@ports.1" dataRecipient="//@SAElements.0/@applicationData.0" receiverName="RoomController"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.0/@modes.1/@behaviouralElements.2" target="//@SAElements.0/@modes.1/@behaviouralElements.4"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.0/@modes.1/@behaviouralElements.4" target="//@SAElements.0/@modes.1/@exits.0" condition="O2>0.23"/>
+      <entries/>
+      <exits incoming="//@SAElements.0/@modes.1/@behaviouralElements.6" targetMode="//@SAElements.0/@modes.0/@entries.0"/>
+    </modes>
+    <applicationData xsi:type="components:PrimitiveDataDeclaration" dataName="O2" value="0" type="real"/>
+  </SAElements>
+  <SAElements xsi:type="components:Component" name="RoomPeopleCounter">
+    <ports xsi:type="components:OutMessagePort"/>
+    <modes xsi:type="components:InitialMode">
+      <behaviouralElements xsi:type="components:Human" outgoing="//@SAElements.1/@modes.0/@behaviouralElements.2"/>
+      <behaviouralElements xsi:type="components:CountPeople" name="get" incoming="//@SAElements.1/@modes.0/@behaviouralElements.2" dataDeclarationName="count" data="count" dataRecipient="//@SAElements.1/@applicationData.0"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.1/@modes.0/@behaviouralElements.0" target="//@SAElements.1/@modes.0/@behaviouralElements.1"/>
+      <behaviouralElements xsi:type="components:TimerFired" outgoing="//@SAElements.1/@modes.0/@behaviouralElements.6" timerName="monitorTimer" timer="//@SAElements.1/@modes.0/@behaviouralElements.4"/>
+      <behaviouralElements xsi:type="components:StartTimer" name="monitorTimer" cyclic="true" period="5000"/>
+      <behaviouralElements xsi:type="components:UnicastSendMessage" name="count" incoming="//@SAElements.1/@modes.0/@behaviouralElements.6" data="count" toMessagePorts="//@SAElements.1/@ports.0" dataRecipient="//@SAElements.1/@applicationData.0" receiverName="RoomController"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.1/@modes.0/@behaviouralElements.3" target="//@SAElements.1/@modes.0/@behaviouralElements.5"/>
+    </modes>
+    <applicationData xsi:type="components:PrimitiveDataDeclaration" dataName="count" value="0"/>
+  </SAElements>
+  <SAElements xsi:type="components:Component" name="RoomController">
+    <ports xsi:type="components:InMessagePort" name=""/>
+    <ports xsi:type="components:InMessagePort"/>
+    <ports xsi:type="components:OutMessagePort"/>
+    <ports xsi:type="components:OutMessagePort"/>
+    <ports xsi:type="components:InMessagePort"/>
+    <ports xsi:type="components:OutMessagePort"/>
+    <ports xsi:type="components:OutMessagePort"/>
+    <ports xsi:type="components:OutMessagePort"/>
+    <modes xsi:type="components:InitialMode" name="">
+      <behaviouralElements xsi:type="components:ReceiveMessage" name="receive 2" outgoing="//@SAElements.2/@modes.0/@behaviouralElements.5" dataRecipientName="OxygenSensor" fromMessagePorts="//@SAElements.2/@ports.0 //@SAElements.2/@ports.4" dataRecipient="//@SAElements.2/@applicationData.0"/>
+      <behaviouralElements xsi:type="components:ReceiveMessage" name="receive 1" outgoing="//@SAElements.2/@modes.0/@behaviouralElements.3" dataRecipientName="RoomPeopleCounter" fromMessagePorts="//@SAElements.2/@ports.1" dataRecipient="//@SAElements.2/@applicationData.1"/>
+      <behaviouralElements xsi:type="components:Choice" name="choice" outgoing="//@SAElements.2/@modes.0/@behaviouralElements.12 //@SAElements.2/@modes.0/@behaviouralElements.13" incoming="//@SAElements.2/@modes.0/@behaviouralElements.3"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.2/@modes.0/@behaviouralElements.1" target="//@SAElements.2/@modes.0/@behaviouralElements.2"/>
+      <behaviouralElements xsi:type="components:Choice" outgoing="//@SAElements.2/@modes.0/@behaviouralElements.7 //@SAElements.2/@modes.0/@behaviouralElements.11" incoming="//@SAElements.2/@modes.0/@behaviouralElements.5"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.2/@modes.0/@behaviouralElements.0" target="//@SAElements.2/@modes.0/@behaviouralElements.4"/>
+      <behaviouralElements xsi:type="components:UnicastSendMessage" name="4" incoming="//@SAElements.2/@modes.0/@behaviouralElements.7" data="close" toMessagePorts="//@SAElements.2/@ports.2" dataRecipient="//@SAElements.2/@applicationData.5" receiverName="WindowsLockActuator"/>
+      <behaviouralElements xsi:type="components:Link" name="" source="//@SAElements.2/@modes.0/@behaviouralElements.4" target="//@SAElements.2/@modes.0/@behaviouralElements.6" condition="OxygenSensor>0.23"/>
+      <behaviouralElements xsi:type="components:UnicastSendMessage" name="3" incoming="//@SAElements.2/@modes.0/@behaviouralElements.11" data="open" toMessagePorts="//@SAElements.2/@ports.3" dataRecipient="//@SAElements.2/@applicationData.5" receiverName="WindowsLockActuator"/>
+      <behaviouralElements xsi:type="components:UnicastSendMessage" name="2" incoming="//@SAElements.2/@modes.0/@behaviouralElements.12" data="close" toMessagePorts="//@SAElements.2/@ports.5" receiverName="EntranceLockActuator"/>
+      <behaviouralElements xsi:type="components:UnicastSendMessage" name="1" incoming="//@SAElements.2/@modes.0/@behaviouralElements.13" data="open" toMessagePorts="//@SAElements.2/@ports.6" dataRecipient="//@SAElements.2/@applicationData.5" receiverName="EntranceLockActuator"/>
+      <behaviouralElements xsi:type="components:Link" name="" source="//@SAElements.2/@modes.0/@behaviouralElements.4" target="//@SAElements.2/@modes.0/@behaviouralElements.8" condition="OxygenSensor&lt;0.19"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.2/@modes.0/@behaviouralElements.2" target="//@SAElements.2/@modes.0/@behaviouralElements.9" condition="RoomPeopleCounter>rCapacity"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.2/@modes.0/@behaviouralElements.2" target="//@SAElements.2/@modes.0/@behaviouralElements.10" condition="RoomPeopleCounter&lt;rCapacity"/>
+      <behaviouralElements xsi:type="components:StartTimer" name="UpdateServer" cyclic="true" period="60000"/>
+      <behaviouralElements xsi:type="components:TimerFired" outgoing="//@SAElements.2/@modes.0/@behaviouralElements.17"/>
+      <behaviouralElements xsi:type="components:UnicastSendMessage" name="" incoming="//@SAElements.2/@modes.0/@behaviouralElements.17" data="oxy,pCount,roomID" toMessagePorts="//@SAElements.2/@ports.7" dataRecipient="//@SAElements.2/@applicationData.3" receiverName="Server"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.2/@modes.0/@behaviouralElements.15" target="//@SAElements.2/@modes.0/@behaviouralElements.16"/>
+    </modes>
+    <applicationData xsi:type="components:PrimitiveDataDeclaration" dataName="OxygenSensor" value="0" type="real"/>
+    <applicationData xsi:type="components:PrimitiveDataDeclaration" dataName="RoomPeopleCounter" value="0"/>
+    <applicationData xsi:type="components:PrimitiveDataDeclaration" dataName="roomID" value="7"/>
+    <applicationData xsi:type="components:PrimitiveDataDeclaration" dataName="rCapacity" value="35"/>
+    <applicationData xsi:type="components:PrimitiveDataDeclaration" dataName="open" value="1" type="boolean"/>
+    <applicationData xsi:type="components:PrimitiveDataDeclaration" dataName="close" value="0" type="boolean"/>
+  </SAElements>
+  <SAElements xsi:type="components:Connection" source="//@SAElements.0/@ports.1" target="//@SAElements.2/@ports.0"/>
+  <SAElements xsi:type="components:Connection" source="//@SAElements.0/@ports.0" target="//@SAElements.2/@ports.4"/>
+  <SAElements xsi:type="components:Connection" source="//@SAElements.1/@ports.0" target="//@SAElements.2/@ports.1"/>
+  <SAElements xsi:type="components:Component" name="Server">
+    <ports xsi:type="components:InMessagePort"/>
+    <modes xsi:type="components:InitialMode">
+      <behaviouralElements xsi:type="components:ReceiveMessage" outgoing="//@SAElements.6/@modes.0/@behaviouralElements.3" dataRecipientName="oxy,pCount,roomID" fromMessagePorts="//@SAElements.6/@ports.0" dataRecipient="//@SAElements.0/@applicationData.0"/>
+      <behaviouralElements xsi:type="components:Server" outgoing="//@SAElements.6/@modes.0/@behaviouralElements.4" incoming="//@SAElements.6/@modes.0/@behaviouralElements.3"/>
+      <behaviouralElements xsi:type="components:BroadcastSendMessage" incoming="//@SAElements.6/@modes.0/@behaviouralElements.4" data="MobileApp"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.6/@modes.0/@behaviouralElements.0" target="//@SAElements.6/@modes.0/@behaviouralElements.1" condition="store"/>
+      <behaviouralElements xsi:type="components:Link" name="" source="//@SAElements.6/@modes.0/@behaviouralElements.1" target="//@SAElements.6/@modes.0/@behaviouralElements.2" condition=""/>
+    </modes>
+  </SAElements>
+  <SAElements xsi:type="components:Connection" source="//@SAElements.2/@ports.7" target="//@SAElements.6/@ports.0"/>
+  <SAElements xsi:type="components:Component" name="WindowsLockActuator">
+    <ports xsi:type="components:InMessagePort"/>
+    <ports xsi:type="components:InMessagePort"/>
+    <modes xsi:type="components:InitialMode">
+      <behaviouralElements xsi:type="components:ReceiveMessage" outgoing="//@SAElements.8/@modes.0/@behaviouralElements.4" dataRecipientName="enable" fromMessagePorts="//@SAElements.8/@ports.0" dataRecipient="//@SAElements.2/@applicationData.4"/>
+      <behaviouralElements xsi:type="components:ReceiveMessage" outgoing="//@SAElements.8/@modes.0/@behaviouralElements.3" dataRecipientName="disable" fromMessagePorts="//@SAElements.8/@ports.1" dataRecipient="//@SAElements.2/@applicationData.5"/>
+      <behaviouralElements xsi:type="components:Actuate" name="actuate" incoming="//@SAElements.8/@modes.0/@behaviouralElements.3 //@SAElements.8/@modes.0/@behaviouralElements.4" data="actuate"/>
+      <behaviouralElements xsi:type="components:Link" name="close" source="//@SAElements.8/@modes.0/@behaviouralElements.1" target="//@SAElements.8/@modes.0/@behaviouralElements.2" condition="disable"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.8/@modes.0/@behaviouralElements.0" target="//@SAElements.8/@modes.0/@behaviouralElements.2" condition="enable"/>
+    </modes>
+    <applicationData xsi:type="components:PrimitiveDataDeclaration" dataName="enable" value="1" type="boolean"/>
+    <applicationData xsi:type="components:PrimitiveDataDeclaration" dataName="disable" value="false" type="boolean"/>
+  </SAElements>
+  <SAElements xsi:type="components:Component" name="EntranceLockActuator">
+    <ports xsi:type="components:InMessagePort"/>
+    <ports xsi:type="components:InMessagePort"/>
+    <modes xsi:type="components:InitialMode">
+      <behaviouralElements xsi:type="components:ReceiveMessage" outgoing="//@SAElements.9/@modes.0/@behaviouralElements.4" dataRecipientName="enable" fromMessagePorts="//@SAElements.9/@ports.1" dataRecipient="//@SAElements.2/@applicationData.4"/>
+      <behaviouralElements xsi:type="components:ReceiveMessage" outgoing="//@SAElements.9/@modes.0/@behaviouralElements.3" dataRecipientName="disable" fromMessagePorts="//@SAElements.9/@ports.0" dataRecipient="//@SAElements.2/@applicationData.5"/>
+      <behaviouralElements xsi:type="components:Actuate" incoming="//@SAElements.9/@modes.0/@behaviouralElements.3 //@SAElements.9/@modes.0/@behaviouralElements.4"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.9/@modes.0/@behaviouralElements.1" target="//@SAElements.9/@modes.0/@behaviouralElements.2" condition="disable"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.9/@modes.0/@behaviouralElements.0" target="//@SAElements.9/@modes.0/@behaviouralElements.2" condition="enable"/>
+    </modes>
+    <applicationData xsi:type="components:PrimitiveDataDeclaration" dataName="enable" value="1" type="boolean"/>
+    <applicationData xsi:type="components:PrimitiveDataDeclaration" dataName="disable" value="0"/>
+  </SAElements>
+  <SAElements xsi:type="components:Connection" source="//@SAElements.2/@ports.2" target="//@SAElements.8/@ports.1"/>
+  <SAElements xsi:type="components:Connection" source="//@SAElements.2/@ports.3" target="//@SAElements.8/@ports.0"/>
+  <SAElements xsi:type="components:Connection" source="//@SAElements.2/@ports.5" target="//@SAElements.9/@ports.0"/>
+  <SAElements xsi:type="components:Connection" source="//@SAElements.2/@ports.6" target="//@SAElements.9/@ports.1"/>
+</components:SoftwareArchitecture>

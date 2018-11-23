@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<components:SoftwareArchitecture xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:components="components">
+  <SAElements xsi:type="components:Component" name="MonitoringNode">
+    <ports xsi:type="components:InMessagePort"/>
+    <modes xsi:type="components:InitialMode">
+      <behaviouralElements xsi:type="components:ReceiveMessage" name="receive" dataRecipientName="temperature" fromMessagePorts="//@SAElements.0/@ports.0" dataRecipient="//@SAElements.0/@applicationData.0"/>
+    </modes>
+    <applicationData xsi:type="components:PrimitiveDataDeclaration" dataName="temperature" type="real"/>
+  </SAElements>
+  <SAElements xsi:type="components:Component" name="TemperatureSensor">
+    <ports xsi:type="components:OutMessagePort"/>
+    <modes xsi:type="components:InitialMode" name="mode1">
+      <behaviouralElements xsi:type="components:UnicastSendMessage" name="1" incoming="//@SAElements.1/@modes.0/@behaviouralElements.5" data="currentTemperature" toMessagePorts="//@SAElements.1/@ports.0" dataRecipient="//@SAElements.1/@applicationData.0" receiverName="MonitoringNode"/>
+      <behaviouralElements xsi:type="components:StartTimer" name="readingTimer" cyclic="true" period="500"/>
+      <behaviouralElements xsi:type="components:TimerFired" name="readingTimerFired" outgoing="//@SAElements.1/@modes.0/@behaviouralElements.4" timerName="readingTimer" timer="//@SAElements.1/@modes.0/@behaviouralElements.1"/>
+      <behaviouralElements xsi:type="components:SenseTemperature" name="sense temp" outgoing="//@SAElements.1/@modes.0/@behaviouralElements.5" incoming="//@SAElements.1/@modes.0/@behaviouralElements.4" dataDeclarationName="currentTemperature" data="" dataRecipient="//@SAElements.1/@applicationData.0"/>
+      <behaviouralElements xsi:type="components:Link" source="//@SAElements.1/@modes.0/@behaviouralElements.2" target="//@SAElements.1/@modes.0/@behaviouralElements.3"/>
+      <behaviouralElements xsi:type="components:Link" name="justName" source="//@SAElements.1/@modes.0/@behaviouralElements.3" target="//@SAElements.1/@modes.0/@behaviouralElements.0" condition="currentTemperature>38"/>
+      <exits targetMode="//@SAElements.1/@modes.1/@entries.0"/>
+    </modes>
+    <modes name="mode2">
+      <entries/>
+    </modes>
+    <applicationData xsi:type="components:PrimitiveDataDeclaration" dataName="currentTemperature" value="" type="real"/>
+  </SAElements>
+  <SAElements xsi:type="components:Connection" source="//@SAElements.1/@ports.0" target="//@SAElements.0/@ports.0"/>
+</components:SoftwareArchitecture>
